@@ -11,6 +11,7 @@
 		   width: 20px;
 		   height: 75px;
 		   background-color: teal;
+		   margin-right: 2px;
 		  }
 		</style>
 	</head>
@@ -32,7 +33,7 @@
 				return "blue";
 			}});
 		</script>
-		2nd D3 example
+		2nd D3 example </br>
 		<script type="text/javascript">
 			var dataset1 = [6,3,2,6,7,33,40,42,48,43,2,2,1,3,3,14,6,16,2,10];
 			d3.select("body").selectAll("div")
