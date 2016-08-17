@@ -109,11 +109,15 @@
 			var w = 300;
 			var h = 400;
 
-			var dataset = [[34,34],[54,23],[64,76]];
+			var dataset = [[167,36],[54,23],[64,76],[106,12],[23,53],[16,37],[23,86],[198,78],[154,22],[205,12],[234,34],[198,89]];
 
 			// In v4, of D3 library, this is how to create axes. create x variable and assign it the domain and range. It should be of type scaleLinear. Later pass this x variable to axisBottom which will plot the axis for you. 
 			var x = d3.scaleLinear().range([0,w]);
 			x.domain([0,d3.max(dataset, function(d){return d[0];})]);
+
+
+			var y = d3.scaleLinear().range([0,h]);
+			y.domain([0,d3.max(dataset, function(d){return d[1];})]);
 
 			var svg = d3.select("body")
 					.append("svg")
@@ -127,12 +131,26 @@
                                         .append("circle")
                                         .attr("cx",function(d){return d[0];})
                                         .attr("cy",function(d){return d[1];})
-                                        .attr("r",10);
+                                        .attr("r",5);
+
+// Plot the x,y coordinates on the graph 
+svg.selectAll("text")
+                           .data(dataset)
+                           .enter()
+                           .append("text")
+                           .text(function(d){ return d[0]+","+d[1]})
+                           .attr("x", function(d){ return d[0]+4;})                                          .attr("y", function(d){ return d[1];})
+                           .attr("font-family", "sans-seriff")
+                           .attr("font-size", "11px")
+                           .attr("fill", "red"); 
 
 //Actually plot the axis by callling axisBottom and passing it the x variable. The transform function when applied to g group changes the actual location of the axis on the svg element. Here we moved it to the bottom of the svg. Without transform, it would be plotted above the data points on the scatterplot
 					svg.append("g")
 					.attr("transform","translate(0," + height + ")")
 					.call(d3.axisBottom(x));
+
+					svg.append("g")
+					.call(d3.axisLeft(y));
 				
 			</script>
 			
